@@ -5,7 +5,13 @@ const questionsImport = require('./questions');
 const questions = questionsImport.One;
 const questionsEngineer = questionsImport.Two;
 const questionsIntern = questionsImport.Three;
-
+const classImport = require('./classes');
+const Employee = classImport.One;
+const Manager = classImport.Two;
+let s = new Employee("j","j","j");
+let t = new Manager("a","b","c","d")
+console.log(s);
+console.log(t);
 inquirer
   .prompt(questions).then((response)=>{
     if (response.employeeType == "I am finished"){
