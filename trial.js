@@ -4,11 +4,17 @@ class Employee {
         this.ID=ID;
         this.Email=Email;
     };
-    getName(){};
-    getID(){};
-    getEmail(){};
+    getName(){
+        return this.name;
+    };
+    getID(){
+        return this.ID;
+    };
+    getEmail(){
+        return this.Email;
+    };
     getRole(){
-        console.log("Employee")
+        return "Employee";
     };
 };
 
@@ -18,7 +24,7 @@ class Manager extends Employee {
         this.officeNum=officeNum
     };
     getRole(){
-        console.log("Manager")
+        return "Manager";
     };
 };
 
@@ -52,7 +58,7 @@ let engineer = new Engineer("Josh", 3456, "love", "lovens");
 let intern = new Intern("Jill", 5678, "superlove", "unilove");
 
 let employeeArray = [engineer, intern]
-function trial (something){
+function addWorkersHtml (something){
     something.forEach(element => {
         if (element.getRole() == "engineer"){
             let engineerOutputTitle = document.createElement("ol");
@@ -62,21 +68,35 @@ function trial (something){
             let engineerOutputName = document.createElement("li");
             let engineerOutputID = document.createElement("li");
             let engineerOutputEmail = document.createElement("li");
+            let engineerOutputGitHub = document.createElement("li");
             engineerOutputName.textContent = element.getName();
             engineerOutputID.textContent = element.getID();
             engineerOutputEmail.textContent = element.getEmail();
+            engineerOutputGitHub.textContent = element.getgitHub();
             let position1 = document.querySelector("ol");
             position1.appendChild(engineerOutputName);
             position1.appendChild(engineerOutputID);
             position1.appendChild(engineerOutputEmail);
-
-
-
-            //create <ol> with <li>
-            console.log(element.getgitHub())
+            position1.appendChild(engineerOutputGitHub);
         } else if (element.getRole() == "Intern"){
-            console.log(element.getUni())
+            let internOutputTitle = document.createElement("ol");
+            internOutputTitle.textContent = element.getRole();
+            let position = document.querySelector("main");
+            position.appendChild(internOutputTitle);
+            let internOutputName = document.createElement("li");
+            let internOutputID = document.createElement("li");
+            let internOutputEmail = document.createElement("li");
+            let internOutputUni = document.createElement("li");
+            internOutputName.textContent = element.getName();
+            internOutputID.textContent = element.getID();
+            internOutputEmail.textContent = element.getEmail();
+            internOutputUni.textContent = element.getUni();
+            let position1 = document.querySelector("ol");
+            position1.appendChild(internOutputName);
+            position1.appendChild(internOutputID);
+            position1.appendChild(internOutputEmail);
+            position1.appendChild(internOutputUni);
         }
     });    
 };
-trial(employeeArray);
+addWorkersHtml(employeeArray);
