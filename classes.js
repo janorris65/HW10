@@ -24,6 +24,7 @@ class Engineer extends Employee {
         this.GitHub=GitHub
     };
     getRole(){};
+    getgitHub(){};
 };
 
 class Intern extends Employee {
@@ -32,6 +33,7 @@ class Intern extends Employee {
         this.Uni=Uni
     };
     getRole(){};
+    getUni(){};
 };
 
 module.exports = {
