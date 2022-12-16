@@ -12,7 +12,9 @@ const Engineer = classImport.Three;
 const Intern = classImport.Four;
 let lowlyEmployeeArray= [];
 let lowlyEmployeeArrayString = [];
+let lowlyEmployeeArrayStringFinal;
 let TheManager;
+let ManagerinHtml;
 const theHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +25,9 @@ const theHtml = `<!DOCTYPE html>
 </head>
 <body>
     <header id="theMan"></header>
+    ${ManagerinHtml}
     <main id="theWorkers"></main>
+    ${lowlyEmployeeArrayStringFinal}
 </body>
 <script src="makePage.js"></script>
 </html>`
@@ -32,6 +36,7 @@ inquirer
   .prompt(questions).then((response)=>{
     TheManager = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOffice)
     if (response.employeeType == "I am finished"){
+       makeManager(TheManager);
        makeHtml(theHtml);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
@@ -46,6 +51,9 @@ inquirer
     let engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.engineerGit);
     lowlyEmployeeArray.push(engineer);
     if (response.employeeType == "I am finished"){
+        makeManager(TheManager);
+        addWorkersHtml(lowlyEmployeeArray);
+        lowlyEmployeeArrayString.join(' ')
         makeHtml(theHtml);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
@@ -60,6 +68,9 @@ inquirer
     let intern = new Intern(response.internName, response.internID, response.internEmail, response.internUni);
     lowlyEmployeeArray.push(intern);
     if (response.employeeType == "I am finished"){
+        makeManager(TheManager);
+        addWorkersHtml(lowlyEmployeeArray);
+        lowlyEmployeeArrayString.join(' ');
         makeHtml(theHtml);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
@@ -68,6 +79,15 @@ inquirer
     }
   })
   };
+
+function makeManager(management){
+    ManagerinHtml = `<div class='card'> ${management.getRole()} 
+             <h4> ${management.getName()}<h4>
+             <p> ${management.getID()}<p>
+             <p> ${management.getEmail()}<p>
+             <p> ${management.getofficeNum()}<p>`;
+
+};
 
 function addWorkersHtml (something){
     something.forEach(element => {
