@@ -10,17 +10,29 @@ const Employee = classImport.One;
 const Manager = classImport.Two;
 const Engineer = classImport.Three;
 const Intern = classImport.Four;
-let lowlyEmployeeArray=[];
+let lowlyEmployeeArray= [];
+let lowlyEmployeeArrayString = [];
 let TheManager;
-let theHtml = 
-'<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta http-equiv="X-UA-Compatible" content="IE=edge">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Document</title></head><body>    <header id="theMan"></header><main id="theWorkers"></main></body><script src="index.js"></script></html>'
+const theHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header id="theMan"></header>
+    <main id="theWorkers"></main>
+</body>
+<script src="makePage.js"></script>
+</html>`
 
 inquirer
   .prompt(questions).then((response)=>{
     TheManager = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOffice)
     if (response.employeeType == "I am finished"){
-        makeHtml(theHtml);
-        console.log(TheManager);
+       makeHtml(theHtml);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
     } else if (response.employeeType== "Intern"){
@@ -35,8 +47,6 @@ inquirer
     lowlyEmployeeArray.push(engineer);
     if (response.employeeType == "I am finished"){
         makeHtml(theHtml);
-        console.log(lowlyEmployeeArray);
-        console.log(TheManager);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
     } else if (response.employeeType == "Intern"){
@@ -51,8 +61,6 @@ inquirer
     lowlyEmployeeArray.push(intern);
     if (response.employeeType == "I am finished"){
         makeHtml(theHtml);
-        console.log(lowlyEmployeeArray);
-        console.log(TheManager);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
     } else if (response.employeeType == "Intern"){
@@ -61,11 +69,27 @@ inquirer
   })
   };
 
+function addWorkersHtml (something){
+    something.forEach(element => {
+        if (element.getRole() == "engineer"){    
+            let engineerToString = `<div class='card'> ${element.getRole()} 
+             <h4> ${element.getName()}<h4>
+             <p> ${element.getID()}<p>
+             <p> ${element.getEmail()}<p>
+             <p> ${element.getgitHub()}<p>`;
+            lowlyEmployeeArrayString.push(engineerToString);
+        } else if (element.getRole() == "Intern"){ 
+            let internToString = `<div class='card'> ${element.getRole()} 
+            <h4> ${element.getName()}<h4>
+            <p> ${element.getID()}<p>
+            <p> ${element.getEmail()}<p>
+            <p> ${element.getUni()}<p>`;
+            lowlyEmployeeArrayString.push(internToString);              
+        }
+    });    
+};
 
-function makeHtml(endResult){
-    fs.writeFile("index.html", endResult,(err) =>
-err ? console.log(err) : console.log('Success!'))
-} 
-function addWorkersHtml(){
-    lowlyEmployeeArray.forEach
-}
+
+function makeHtml(theHtml){
+    fs.writeFile("index.html", theHtml,(err) =>
+err ? console.log(err) : console.log("Success!"));}
