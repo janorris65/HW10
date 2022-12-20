@@ -97,11 +97,11 @@ inquirer
             <title>Employee Log</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         </head>
-        <body>
+        <body class="d-inline-flex flex-column align-items-center mb-3">
             <header id="theMan">
             ${ManagerinHtml}
             </header>
-            <main id="theWorkers">
+            <main class="d-inline-flex flex-row" id="theWorkers">
             ${lowlyEmployeeArrayStringFinal}
             </main>
         </body>
@@ -122,7 +122,7 @@ function makeManager(management){
       <h6 class="card-subtitle mb-2 text-muted">${management.getName()}</h6>
       <p class="card-text">ID:${management.getID()}</p>
       <p class="card-text">Office Number:${management.getofficeNum()}</p>
-      <a href="#" class="card-link">${management.getEmail()}</a>
+      <a href="mailto:${management.getEmail()}" class="card-link">${management.getEmail()}</a>
     </div>
   </div>`;
 };
@@ -136,7 +136,7 @@ function addWorkersHtml (thePeople){
               <h6 class="card-subtitle mb-2 text-muted">${element.getName()}</h6>
               <p class="card-text">ID:${element.getID()}</p>
               <p class="card-text">GitHub:${element.getgitHub()}</p>
-              <a href="#" class="card-link">${element.getEmail()}</a>
+              <a href="mailto:${element.getEmail()}" class="card-link">${element.getEmail()}</a>
             </div>
           </div>`;
             lowlyEmployeeArrayString.push(engineerToString);
@@ -147,7 +147,7 @@ function addWorkersHtml (thePeople){
               <h6 class="card-subtitle mb-2 text-muted">${element.getName()}</h6>
               <p class="card-text">ID:${element.getID()}</p>
               <p class="card-text">University:${element.getUni()}</p>
-              <a href="#" class="card-link">${element.getEmail()}</a>
+              <a href="mailto:${element.getEmail()}" class="card-link">${element.getEmail()}</a>
             </div>
           </div>`;
             lowlyEmployeeArrayString.push(internToString);              
