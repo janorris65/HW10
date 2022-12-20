@@ -26,6 +26,9 @@ class Manager extends Employee {
     getRole(){
         return "Manager";
     };
+    getofficeNum(){
+        return this.officeNum;
+    }
 };
 
 class Engineer extends Employee {

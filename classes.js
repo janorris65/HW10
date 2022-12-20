@@ -21,10 +21,13 @@ class Employee {
 class Manager extends Employee {
     constructor(name, ID, Email, officeNum){
         super(name, ID, Email)
-        this.officeNum=officeNum
+        this.officeNum = officeNum
     };
     getRole(){
         return "Manager";
+    };
+    getofficeNum(){
+        return this.officeNum;
     };
 };
 

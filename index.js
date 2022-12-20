@@ -15,22 +15,22 @@ let lowlyEmployeeArrayString = [];
 let lowlyEmployeeArrayStringFinal;
 let TheManager;
 let ManagerinHtml;
-const theHtml = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <header id="theMan"></header>
-    ${ManagerinHtml}
-    <main id="theWorkers"></main>
-    ${lowlyEmployeeArrayStringFinal}
-</body>
-<script src="makePage.js"></script>
-</html>`
+// const theHtml = `<!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Document</title>
+// </head>
+// <body>
+//     <header id="theMan"></header>
+//     ${ManagerinHtml}
+//     <main id="theWorkers"></main>
+//     ${lowlyEmployeeArrayStringFinal}
+// </body>
+// <script src="makePage.js"></script>
+// </html>`
 
 inquirer
   .prompt(questions).then((response)=>{
@@ -53,7 +53,24 @@ inquirer
     if (response.employeeType == "I am finished"){
         makeManager(TheManager);
         addWorkersHtml(lowlyEmployeeArray);
-        lowlyEmployeeArrayString.join(' ')
+        lowlyEmployeeArrayStringFinal = lowlyEmployeeArrayString.join(' ');
+        const theHtml = `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            <header id="theMan">
+            ${ManagerinHtml}
+            </header>            
+            <main id="theWorkers">
+            ${lowlyEmployeeArrayStringFinal}
+            </main>    
+        </body>
+        </html>`
         makeHtml(theHtml);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
@@ -70,7 +87,25 @@ inquirer
     if (response.employeeType == "I am finished"){
         makeManager(TheManager);
         addWorkersHtml(lowlyEmployeeArray);
-        lowlyEmployeeArrayString.join(' ');
+        lowlyEmployeeArrayStringFinal = lowlyEmployeeArrayString.join(' ');
+        const theHtml = `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Employee Log</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        </head>
+        <body>
+            <header id="theMan">
+            ${ManagerinHtml}
+            </header>
+            <main id="theWorkers">
+            ${lowlyEmployeeArrayStringFinal}
+            </main>
+        </body>
+        </html>`
         makeHtml(theHtml);
     } else if (response.employeeType == "Engineer"){
          engineerCall(questionsEngineer);
@@ -81,29 +116,40 @@ inquirer
   };
 
 function makeManager(management){
-    ManagerinHtml = `<div class='card'> ${management.getRole()} 
-             <h4> ${management.getName()}<h4>
-             <p> ${management.getID()}<p>
-             <p> ${management.getEmail()}<p>
-             <p> ${management.getofficeNum()}<p>`;
-
+    ManagerinHtml = `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${management.getRole()}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${management.getName()}</h6>
+      <p class="card-text">ID:${management.getID()}</p>
+      <p class="card-text">Office Number:${management.getofficeNum()}</p>
+      <a href="#" class="card-link">${management.getEmail()}</a>
+    </div>
+  </div>`;
 };
 
-function addWorkersHtml (something){
-    something.forEach(element => {
+function addWorkersHtml (thePeople){
+    thePeople.forEach(element => {
         if (element.getRole() == "engineer"){    
-            let engineerToString = `<div class='card'> ${element.getRole()} 
-             <h4> ${element.getName()}<h4>
-             <p> ${element.getID()}<p>
-             <p> ${element.getEmail()}<p>
-             <p> ${element.getgitHub()}<p>`;
+            let engineerToString = `<div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${element.getRole()}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${element.getName()}</h6>
+              <p class="card-text">ID:${element.getID()}</p>
+              <p class="card-text">GitHub:${element.getgitHub()}</p>
+              <a href="#" class="card-link">${element.getEmail()}</a>
+            </div>
+          </div>`;
             lowlyEmployeeArrayString.push(engineerToString);
         } else if (element.getRole() == "Intern"){ 
-            let internToString = `<div class='card'> ${element.getRole()} 
-            <h4> ${element.getName()}<h4>
-            <p> ${element.getID()}<p>
-            <p> ${element.getEmail()}<p>
-            <p> ${element.getUni()}<p>`;
+            let internToString = `<div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${element.getRole()}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${element.getName()}</h6>
+              <p class="card-text">ID:${element.getID()}</p>
+              <p class="card-text">University:${element.getUni()}</p>
+              <a href="#" class="card-link">${element.getEmail()}</a>
+            </div>
+          </div>`;
             lowlyEmployeeArrayString.push(internToString);              
         }
     });    
