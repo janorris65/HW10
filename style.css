@@ -1,0 +1,17 @@
+
+
+header {
+    color: black;
+  }
+  
+body {
+    background-color: blanchedalmond;
+}
+
+.card {
+    background-color: lightgray;
+}
+
+.card-title {
+    background-color: lightgreen;
+}
